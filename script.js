@@ -1,5 +1,5 @@
     // glavni canvas
-	const canvas = document.querySelector("canvas");
+	const canvas = document.querySelector("#mycanvas");
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	const c = canvas.getContext("2d");
@@ -350,7 +350,7 @@
 			for (let i = 0; i < 3; i++) {
 				if(i==1) {
 					do{
-						bonus[i]=randomBonus();
+						bonusi[i]=randomBonus();
 					} while (udaljenost(bonusi[i].x, bonusi[i].y, bonusi[0].x, bonusi[0].y) < window.innerWidth/4);
 					continue;
 				}
