@@ -110,14 +110,14 @@
 		canvas.style.touchAction = "none";
 
 		canvas.addEventListener("pointerdown", (e) => {
-			M.x = e.x;
-			M.y = e.y;
+			M.x = e.clientX;
+			M.y = e.clientY;
 			canvas.setPointerCapture(e.pointerId); // prati prst i van canvasa
 		});
 
 		canvas.addEventListener("pointermove", (e) => {
-			M.x = e.x;
-			M.y = e.y;
+			M.x = e.clientX;
+			M.y = e.clientY;
 		});
 	} else {
 		// desktop
