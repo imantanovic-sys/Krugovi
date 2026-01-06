@@ -105,6 +105,28 @@
 
 	const M = { x: canvas.width / 2, y: canvas.height / 2 };
 
+	if (isTouch) {
+		// da ne skrola stranica dok se vuče prst po canvasu
+		canvas.style.touchAction = "none";
+
+		canvas.addEventListener("pointerdown", (e) => {
+			M.x = e.x;
+			M.y = e.y;
+			canvas.setPointerCapture(e.pointerId); // prati prst i van canvasa
+		});
+
+		canvas.addEventListener("pointermove", (e) => {
+			M.x = e.x;
+			M.y = e.y;
+		});
+	} else {
+		// desktop
+		window.addEventListener("mousemove", (e) => {
+			M.x = e.x;
+			M.y = e.y;
+		});
+	}
+
 	window.addEventListener("keydown", (e) => {
 		if (e.key.toLowerCase() !== "p") return;
 		if (!running) return;          // ne pauziraj ako nije u igri
@@ -126,13 +148,6 @@
 			if (rafId) cancelAnimationFrame(rafId);  
 		}
 	});
-
-
-	window.addEventListener("mousemove", (event) => {
-		M.x = event.x;
-		M.y = event.y;
-	});
-
 
 
 	function applyTheme() {
