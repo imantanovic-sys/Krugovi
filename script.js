@@ -105,27 +105,29 @@
 
 	const M = { x: canvas.width / 2, y: canvas.height / 2 };
 
+	const isTouch = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 	if (isTouch) {
-		// da ne skrola stranica dok se vuče prst po canvasu
-		canvas.style.touchAction = "none";
-
-		canvas.addEventListener("pointerdown", (e) => {
-			M.x = e.clientX;
-			M.y = e.clientY;
-			canvas.setPointerCapture(e.pointerId); // prati prst i van canvasa
-		});
-
-		canvas.addEventListener("pointermove", (e) => {
-			M.x = e.clientX;
-			M.y = e.clientY;
-		});
+	  canvas.style.touchAction = "auto";
+	
+	  canvas.addEventListener("pointerdown", (e) => {
+	    if (!running || paused || gameOver) return;   // <-- ključ
+	    M.x = e.clientX;
+	    M.y = e.clientY;
+	    canvas.setPointerCapture(e.pointerId);
+	  });
+	
+	  canvas.addEventListener("pointermove", (e) => {
+	    if (!running || paused || gameOver) return;   // <-- ključ
+	    M.x = e.clientX;
+	    M.y = e.clientY;
+	  });
 	} else {
-		// desktop
-		window.addEventListener("mousemove", (e) => {
-			M.x = e.x;
-			M.y = e.y;
-		});
+	  window.addEventListener("mousemove", (e) => {
+	    M.x = e.clientX;
+	    M.y = e.clientY;
+	  });
 	}
+
 
 	window.addEventListener("keydown", (e) => {
 		if (e.key.toLowerCase() !== "p") return;
@@ -466,6 +468,7 @@
 
 	// Start/Restart
 	function resetGame() {
+		
 		// reset tajmera i state-a
 		igracBojaHue();
 		startTime = null;
@@ -492,6 +495,7 @@
 	}
 
 	function startGame() {
+		if (isTouch) canvas.style.touchAction = "none";
 		if (rafId) cancelAnimationFrame(rafId); // sigurnost da nema 2 loop-a [web:443]
 		resetGame();
 		rebuildGrid();
@@ -504,6 +508,7 @@
 	}
 
 	function endGame() {
+		if (isTouch) canvas.style.touchAction = "auto";
 		running = false;
 		gameOver = true;
 
