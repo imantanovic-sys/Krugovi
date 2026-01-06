@@ -1,4 +1,4 @@
-// ===== Canvas setup =====
+    // glavni canvas
 	const canvas = document.querySelector("canvas");
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -7,20 +7,7 @@
 	const gridCanvas = document.createElement("canvas");
 	const gridCtx = gridCanvas.getContext("2d");
 
-	let theme = "dark";
-	function resizeCanvas() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
 
-		// ako koristiš cache-ovani grid:
-		rebuildGrid();
-
-		// ako je igra u toku, dobro je i centrirati miš ili samo ostaviti
-		// M.x = canvas.width / 2; M.y = canvas.height / 2;
-	}
-
-	window.addEventListener("resize", resizeCanvas);
-	resizeCanvas(); // pozovi jednom na startu
 
 
 	function rebuildGrid() {
@@ -28,7 +15,6 @@
 		gridCanvas.height = canvas.height;
 
 		gridCtx.clearRect(0,0,gridCanvas.width,gridCanvas.height);
-		// iskoristi tvoju logiku, samo crtaj na gridCtx umjesto c
 		const cell = 40;
 		gridCtx.strokeStyle = (theme === "dark") ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)";
 		gridCtx.lineWidth = 1;
@@ -47,7 +33,18 @@
 		}
 	}
 
-	// ===== UI elements =====
+		let theme = "dark";
+	function resizeCanvas() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		rebuildGrid();
+	}
+
+	window.addEventListener("resize", resizeCanvas);
+	resizeCanvas(); // pozovi jednom na startu
+
+
 	const menu = document.getElementById("menu");
 	const gameOverScreen = document.getElementById("gameOverScreen");
 	const finalScore = document.getElementById("finalScore");
@@ -58,7 +55,7 @@
 	const resetHighScore = document.getElementById("reset_hs");
 	const resetHighScore2 = document.getElementById("reset_hs2");
 
-	// ===== Game state (GLOBAL, bez shadowing-a) =====
+
 	let rafId = null;
 	let running = false;
 	let gameOver = false;
@@ -104,9 +101,8 @@
 	let mojRadius = 20;
 
 	let flashUntil = 0;          // timestamp u ms do kada traje flash
-	const FLASH_MS = 200;        // npr. 250ms (probaj 150–300)
+	const FLASH_MS = 200;       
 
-	// ===== Input (mouse) =====
 	const M = { x: canvas.width / 2, y: canvas.height / 2 };
 
 	window.addEventListener("keydown", (e) => {
@@ -119,7 +115,7 @@
 
 		if (!paused) {
 			// nastavi loop
-			startTime = null;    // opcionalno: resetuj timer da ti bonusi ne “preskoče”
+			startTime = null;    //resetuje timer da bonusi ne “preskoče”
 			lastTick = 0;
 			rafId = requestAnimationFrame(animiraj);
 		} else {
@@ -127,7 +123,7 @@
 			M.x = Krugovi[0].x;
 			M.y = Krugovi[0].y;
 			cekajKursor = true;
-			if (rafId) cancelAnimationFrame(rafId);  // [web:443]
+			if (rafId) cancelAnimationFrame(rafId);  
 		}
 	});
 
@@ -137,7 +133,6 @@
 		M.y = event.y;
 	});
 
-	// ===== Theme + colors =====
 
 
 	function applyTheme() {
@@ -155,16 +150,16 @@
 
 	function generisiRndBoju() {//generise boje koje kontrastuju glavnog igraca na osnovu njegovog hue
 		const base = igracBojaHue();
-		const compHue = (base + 180) % 360; // komplement [web:664]
+		const compHue = (base + 180) % 360; // komplement
 
 		// random varijacija oko komplementa (da ne bude uvijek ista boja)
-		const spread = 60; // stepeni, povećaj/smanji po ukusu
+		const spread = 60; // stepeni
 		const h = (compHue + (Math.random() * 2 - 1) * spread + 360) % 360;
 
 		// drži boje “čiste” (dalje od sivih)
 		const s = 80 + Math.random() * 20;
 
-		// theme podešava lightness kao prije
+		// theme podešava lightness
 		const l = (theme === "dark")
 				? (60 + Math.random() * 20)
 				: (30 + Math.random() * 20);
@@ -190,13 +185,13 @@
 		highScore2.textContent = "Lični rekord: 0";
 	}
 
-	// event handleri (bolje nego inline onclick) [web:422]
+	// event handleri
 	themeBtn.addEventListener("click", toggleTheme);
 	themeBtn2.addEventListener("click", toggleTheme);
 	resetHighScore.addEventListener("click", resetujHS);
 	resetHighScore2.addEventListener("click", resetujHS);
 
-	// ===== Helpers =====
+	// Helperi
 	function udaljenost(x1, y1, x2, y2) {
 		return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 	}
@@ -215,7 +210,7 @@
 		return a;
 	}
 
-	// ===== Classes =====
+	// klase
 	function Krug(x, y, r, dx, dy, boja) {
 		this.x = x;
 		this.y = y;
@@ -284,7 +279,7 @@
 		};
 	}
 
-	// ===== Spawners =====
+	//rnd obj
 	function randomBonus() {
 		return new Bonus(
 				Math.random() * (canvas.width - 40) + 20,
@@ -307,7 +302,7 @@
 		return new Krug(x, y, r, dx, dy, generisiRndBoju());
 	}
 
-	// ===== HUD =====
+	// Heads-up display sa radiusom
 	function nacrtajHUD() {
 		c.font = "20px Arial";
 		c.fillStyle = (theme === "dark") ? "white" : "black";
@@ -341,7 +336,7 @@
 	}*/
 
 
-	// ===== Loop =====
+	//glavni loop
 	function animiraj(t) {
 		if (!running || paused) return;
 
@@ -454,7 +449,7 @@
 		}
 	}
 
-	// ===== Start/Restart =====
+	// Start/Restart
 	function resetGame() {
 		// reset tajmera i state-a
 		igracBojaHue();
@@ -497,7 +492,7 @@
 		running = false;
 		gameOver = true;
 
-		if (rafId) cancelAnimationFrame(rafId); // stop [web:443]
+		if (rafId) cancelAnimationFrame(rafId); // stop
 		if (Krugovi[0].r > hs){
 			hs = Krugovi[0].r;
 			localStorage.setItem(HS_KEY, String(Math.round(hs)));
@@ -507,6 +502,6 @@
 		gameOverScreen.style.display = "flex";
 	}
 
-	// Button handlers
+	// Dugmici za start
 	startBtn.addEventListener("click", startGame);
 	restartBtn.addEventListener("click", startGame);
