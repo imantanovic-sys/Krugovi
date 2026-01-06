@@ -252,7 +252,7 @@
 	}
 
 	function Bonus(x, y, br) {
-		this.r = 0; // da "pojeden" radi s tvojom logikom
+		this.r = 0;
 		this.x = x;
 		this.y = y;
 		this.br = br;
