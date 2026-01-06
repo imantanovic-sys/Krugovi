@@ -9,7 +9,7 @@
 
 
 
-
+	let theme = "dark";
 	function rebuildGrid() {
 		gridCanvas.width = canvas.width;
 		gridCanvas.height = canvas.height;
@@ -33,7 +33,7 @@
 		}
 	}
 
-		let theme = "dark";
+		
 	function resizeCanvas() {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
