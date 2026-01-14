@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='bs'>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Krugovi</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="script.js" defer></script>
+</head>
+<body>
+<canvas id="mycanvas"></canvas>
+<div id="igraStart" class="overlay">
+	<h1 id="naslov">Krugovi</h1>
+	<button id="helpBtn" type="button">?</button>
+
+	<dialog id="help">
+	<h3>Upute</h3>
+	<ul>
+		<li>Pomjeraj krug mišem (desktop) ili prstom (mobitel).</li>
+		<li>Pojedi manje krugove da rasteš.</li>
+		<li>Izbjegavaj veće krugove.</li>
+		<li>P - pauza (desktop), na mobitelu koristi dugme u cosku.</li>
+	</ul>
+	<div style="margin-top:14px;">
+		<button id="zatvoriHelpBtn" type="button">Zatvori</button>
+	</div>
+	</dialog>
+
+	<h3 id="finalScore"></h3>
+	<h3 id="highScore"></h3>
+	<button id="reset_hs">obriši rekord</button>
+	<button id="temaBtn">Tema</button>
+	<div class="color-picker">
+		<label ><input type="radio" name="igracBoja" value="c" checked><span class="swatch" style="background:hsl(7, 82%, 63%);"></span> </label>
+		<label ><input type="radio" name="igracBoja" value="p" ><span class="swatch" style="background:hsl(196, 67%, 33%);"></span> </label>
+		<label ><input type="radio" name="igracBoja" value="z"><span class="swatch" style="background:hsl(141, 31%, 50%);"></span>  </label>
+	</div>
+	<button id="startBtn">Start</button>
+</div>
+<span id="pauzaBtnSpan"><button id="pauzaBtn">P</button></span>
+
+<div id="pauziraj" class="overlay">
+	<h1>Igra pauzirana</h1>
+	<p>pritisnite P za nastavak</p>
+</div>
+</body>
+</html>

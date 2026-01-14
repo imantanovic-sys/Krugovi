@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+			html, body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Rajdhani', system-ui, sans-serif;
+				background: #000;
+				color: #e6e6e6;
+			}
+
+			canvas {
+				position: fixed;
+				inset: 0;
+				display: block;
+				z-index: 0;
+			}
+
+			.overlay {
+				position: fixed;
+				inset: 0;
+				margin: auto;
+				width: min(90vw, 360px);
+				padding: 32px 28px;
+
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+				align-items: center;
+				justify-content: center;
+
+				
+				backdrop-filter: blur(15px);
+
+				border-radius: 14px;
+				border: 2px solid rgba(255,255,255,0.6);
+
+				text-align: center;
+
+				box-shadow:
+				0 10px 30px rgba(0,0,0,0.55);
+
+				margin-top: 40px;
+				margin-bottom: 40px;
+				color: #fff;
+			}
+
+			.overlay h1 {
+				margin: 0;
+				font-size: 2rem;
+				letter-spacing: 0.12em;
+				font-weight: 700;
+				
+				text-shadow: 0 0 6px rgba(143,227,220,0.35);
+			}
+
+			.overlay h3 {
+				margin: 0;
+				font-size: 0.95rem;
+				font-weight: 400;
+				opacity: 0.85;
+			}
+
+			button {
+				font-family: inherit;
+				font-size: 1rem;
+				letter-spacing: 0.08em;
+
+				padding: 10px 22px;
+				min-width: 150px;
+
+				color: rgba(255,255,255);
+				background: rgba(255,255,255,0.06);
+
+				border-radius: 10px;
+				border: 1px solid rgba(255,255,255,0.9);
+
+				cursor: pointer;
+				transition: 0.15s ease;
+			}
+
+			button:hover {
+				background: rgba(255,255,255,0.12);
+				box-shadow: 0 0 10px rgba(143,227,220,0.25);
+			}
+
+			button:active {
+				transform: translateY(1px);
+				background: rgba(255,255,255,0.18);
+			}
+
+
+			.color-picker {
+				display: flex;
+				gap: 12px;
+			}
+
+			.color-picker label {
+				width: 36px;
+				height: 36px;
+				cursor: pointer;
+				display: inline-block;
+			}
+
+			.color-picker input {
+				display: none;
+			}
+
+			.color-picker .swatch {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				display: block;
+				box-shadow:
+					0 0 8px currentColor,
+					inset 0 0 0 2px #fff;
+			}
+
+			.color-picker input:checked + .swatch {
+				transform: scale(1.1);
+				box-shadow:
+					inset 0 0 8px currentColor,
+					0 0 0 2px #fff;
+			}
+
+			#pauzaBtnSpan {
+				position: fixed;
+				top: 14px;
+				right: 14px;
+				display: none;
+			}
+
+			#pauzaBtnSpan button {
+				min-width: auto;
+				padding: 8px 12px;
+				font-size: 0.85rem;
+			}
+			#pauziraj{
+				display: none;
+			}
+			#help{
+				max-width: 20%; 
+				border-radius: 14px; 
+				padding: 18px;
+			}
+			#helpBtn{
+				min-width:auto; 
+				padding:6px 10px;
+                
+			}
+			#zatvoriHelpBtn{
+				min-width:auto; color: black;
+                border: solid 1px rgba(0, 0, 0, 0.548);
+			}
+			ul{
+				text-align:left; 
+				margin:0; 
+				padding-left:18px;
+			}
