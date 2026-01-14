@@ -137,6 +137,7 @@
 			}
 			#pauziraj{
 				display: none;
+				margin: auto;
 			}
 			#help{
 				max-width: 20%; 
@@ -158,3 +159,4 @@
 				padding-left:18px;
 
 			}
+
